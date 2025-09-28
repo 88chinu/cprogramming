@@ -37,16 +37,29 @@ function App() {
     { text: "Learn React" },
     { text: "Go to friend's house" },
     { text: "Build ToDo List" },
-  ])
+  ]);
+
+  // ✅ Add this function
+  const addTodo = (text) => {
+    const newTodos = [...todos, { text }];
+    setTodos(newTodos);
+  };
+
   return (
     <div className="app">
       <div className="todo-list">
         {todos.map((todo, index) => (
-          <Todo key={index} index={index} todo={todo} />
+          <Todo
+            key={index}
+            index={index}
+            todo={todo}
+          />
         ))}
+        <TodoForm addTodo={addTodo} />
       </div>
     </div>
-  )
+  );
 }
+
 
 export default App
