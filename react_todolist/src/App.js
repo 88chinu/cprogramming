@@ -2,23 +2,29 @@ import React, { useState } from "react"
 import logo from "./logo.svg"
 import "./App.css"
 
-function Todo({ todo }) {
+function Todo({ todo, index, completeTodo }) {
   return (
-    <div className="todo">
+    <div 
+      className="todo"
+      style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
+    >
       {todo.text}
+      <div>
+        <button onClick={() => completeTodo(index)}>Complete</button>
+      </div>
     </div>
   )
 }
 
 function TodoForm({ addTodo }) {
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState("")
 
   const handleSubmit = e => {
-    e.preventDefault();
-    if (!value) return;
-    addTodo(value);
-    setValue("");
-  };
+    e.preventDefault()
+    if (!value) return
+    addTodo(value)
+    setValue("")
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -27,23 +33,29 @@ function TodoForm({ addTodo }) {
         className="input"
         value={value}
         onChange={e => setValue(e.target.value)}
+        placeholder="Add a new todo"
       />
     </form>
-  );
+  )
 }
 
 function App() {
-  const [todos, setTodos] = useState([
-    { text: "Learn React" },
-    { text: "Go to friend's house" },
-    { text: "Build ToDo List" },
-  ]);
+  const [todos, setTodos] = React.useState([
+    { text: "Learn about React", isCompleted: false },
+    { text: "Meet friend for lunch", isCompleted: false },
+    { text: "Build really cool todo app", isCompleted: false }
+  ])
 
-  // ✅ Add this function
   const addTodo = (text) => {
-    const newTodos = [...todos, { text }];
-    setTodos(newTodos);
-  };
+    const newTodos = [...todos, { text, isCompleted: false }]
+    setTodos(newTodos)
+  }
+
+  const completeTodo = (index) => {
+    const newTodos = [...todos]
+    newTodos[index].isCompleted = true
+    setTodos(newTodos)
+  }
 
   return (
     <div className="app">
@@ -53,13 +65,13 @@ function App() {
             key={index}
             index={index}
             todo={todo}
+            completeTodo={completeTodo}
           />
         ))}
         <TodoForm addTodo={addTodo} />
       </div>
     </div>
-  );
+  )
 }
-
 
 export default App
