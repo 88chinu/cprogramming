@@ -4,13 +4,14 @@ import "./App.css";
 function Todo({ todo, index, completeTodo, removeTodo }) {
   return (
     <div
-      className="todo"
-      style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
+      className={`todo ${todo.isCompleted ? "completed" : ""}`}
     >
-      {todo.text}
+      <span>{todo.text}</span>
       <div>
-        <button onClick={() => completeTodo(index)}>Complete</button>
-        <button onClick={() => removeTodo(index)}>x</button>
+        <button className="btn complete" onClick={() => completeTodo(index)}>
+          {todo.isCompleted ? "Undo" : "Complete"}
+        </button>
+        <button className="btn delete" onClick={() => removeTodo(index)}>x</button>
       </div>
     </div>
   );
@@ -21,47 +22,40 @@ function TodoForm({ addTodo }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!value) return;
+    if (!value.trim()) return;
     addTodo(value);
     setValue("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="todo-form">
       <input
         type="text"
         className="input"
+        placeholder="Add a new task..."
         value={value}
         onChange={e => setValue(e.target.value)}
       />
+      <button className="btn add">Add</button>
     </form>
   );
 }
 
 function App() {
   const [todos, setTodos] = React.useState([
-    {
-      text: "Learn about React",
-      isCompleted: false
-    },
-    {
-      text: "Meet friend for lunch",
-      isCompleted: false
-    },
-    {
-      text: "Build really cool todo app",
-      isCompleted: false
-    }
+    { text: "Learn about React", isCompleted: false },
+    { text: "Meet friend for lunch", isCompleted: false },
+    { text: "Build really cool todo app", isCompleted: false }
   ]);
 
   const addTodo = text => {
-    const newTodos = [...todos, { text }];
+    const newTodos = [...todos, { text, isCompleted: false }];
     setTodos(newTodos);
   };
 
   const completeTodo = index => {
     const newTodos = [...todos];
-    newTodos[index].isCompleted = true;
+    newTodos[index].isCompleted = !newTodos[index].isCompleted; // toggle
     setTodos(newTodos);
   };
 
@@ -71,8 +65,16 @@ function App() {
     setTodos(newTodos);
   };
 
+  const clearCompleted = () => {
+    const newTodos = todos.filter(todo => !todo.isCompleted);
+    setTodos(newTodos);
+  };
+
   return (
     <div className="app">
+      <h1 className="title">Todo App</h1>
+      <TodoForm addTodo={addTodo} />
+
       <div className="todo-list">
         {todos.map((todo, index) => (
           <Todo
@@ -83,7 +85,11 @@ function App() {
             removeTodo={removeTodo}
           />
         ))}
-        <TodoForm addTodo={addTodo} />
+      </div>
+
+      <div className="footer">
+        <p>{todos.filter(todo => !todo.isCompleted).length} tasks left</p>
+        <button className="btn clear" onClick={clearCompleted}>Clear Completed</button>
       </div>
     </div>
   );
