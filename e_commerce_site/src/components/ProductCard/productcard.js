@@ -10,7 +10,7 @@ import {
 import { addToCart, removeFromCart } from "../../services/CartServices";
 import { addToWishlist, deleteWishList } from "../../services/WishlistServices";
 
-import "./ProductCard.css";
+import "./productcard.css";
 
 function ProductCard({ productCardData }) {
   const { _id, image, title, price, rating, inStock } = productCardData;
