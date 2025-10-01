@@ -6,10 +6,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import { WishlistProvider } from "./context/WishlistContext";
 // import { FilterProvider } from "./context/FilterContext";
 // import { ProductProvider } from "./context/ProductContext";
+import { ProductDataProvider } from "./context/ProductListingPageContext";
 
 // Pages
 import Homepage from "./pages/HomePage/Homepage";
-// import ProductListingPage from "./pages/ProductListingPage/ProductListingPage";
+import ProductListingPage from "./context/ProductListingPageContext";
 // import SingleProductPage from "./pages/SingleProductPage/SingleProductPage";
 // import CartPage from "./pages/CartPage/CartPage";
 // import WishlistPage from "./pages/WishlistPage/WishlistPage";
@@ -22,26 +23,28 @@ import Homepage from "./pages/HomePage/Homepage";
 function App() {
   return (
     <Router>
-      {/* <CartProvider>
-        <WishlistProvider>
-          <FilterProvider>
-            <ProductProvider> */}
-              <Routes>
-                <Route path="/" element={<Homepage />} />
-                {/* <Route path="/ProductListingPage" element={<ProductListingPage />} />
-                <Route path="/Productdetails/:id" element={<SingleProductPage />} />
-                <Route path="/CartPage" element={<CartPage />} />
-                <Route path="/WishlistPage" element={<WishlistPage />} />
-                <Route path="/CheckoutPage" element={<CheckoutPage />} />
-                <Route path="/OrderSuccessPage" element={<OrderSuccessPage />} />
-                <Route path="/AccountPage" element={<ProfilePage />} />
-                <Route path="/LoginPage" element={<LoginPage />} />
-                <Route path="/SignupPage" element={<SignupPage />} /> */}
-              </Routes>
-            {/* </ProductProvider>
-          </FilterProvider>
-        </WishlistProvider>
-      </CartProvider> */}
+      {/* <CartProvider> */}
+        {/* <WishlistProvider> */}
+          {/* <FilterProvider> */}
+            {/* <ProductProvider> */}
+              {/* <ProductDataProvider> */}
+                <Routes>
+                  <Route path="/" element={<Homepage />} />
+                  <Route path="/ProductListingPage" element={<ProductListingPage />} />
+                  <Route path="/Productdetails/:id" element={<SingleProductPage />} />
+                  {/* <Route path="/CartPage" element={<CartPage />} /> */}
+                  {/* <Route path="/WishlistPage" element={<WishlistPage />} /> */}
+                  {/* <Route path="/CheckoutPage" element={<CheckoutPage />} />
+                  <Route path="/OrderSuccessPage" element={<OrderSuccessPage />} /> */}
+                  {/* <Route path="/AccountPage" element={<ProfilePage />} /> */}
+                  {/* <Route path="/LoginPage" element={<LoginPage />} /> */}
+                  {/* <Route path="/SignupPage" element={<SignupPage />} /> */}
+                </Routes>
+              {/* </ProductDataProvider> */}
+            {/* </ProductProvider> */}
+          {/* </FilterProvider> */}
+        {/* </WishlistProvider> */}
+      {/* </CartProvider> */}
     </Router>
   );
 }

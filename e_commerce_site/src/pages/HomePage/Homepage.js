@@ -8,7 +8,7 @@ import {
   Spinner,
 } from "react";
 
-import { useProductDataContext } from "react";
+import { useProductDataContext } from "../../context/ProductListingPageContext";
 
 function Homepage() {
   const { isLoading } = useProductDataContext();

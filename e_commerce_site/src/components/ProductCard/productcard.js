@@ -5,7 +5,7 @@ import {
   useWishlistContext,
   useCartContext,
   useProductContext,
-} from "../../context/AllContextIndex";
+} from "react";
 
 import { addToCart, removeFromCart } from "../../services/CartServices";
 import { addToWishlist, deleteWishList } from "../../services/WishlistServices";
