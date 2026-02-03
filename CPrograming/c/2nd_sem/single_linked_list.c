@@ -9,7 +9,6 @@ struct node
 
 struct node *head = NULL;
 
-/* ---------- CREATE ---------- */
 struct node *create()
 {
     int n;
@@ -51,7 +50,6 @@ struct node *create()
     return head;
 }
 
-/* ---------- TRAVERSE ---------- */
 void traverse(struct node *head)
 {
     int i = 1;
@@ -68,7 +66,6 @@ void traverse(struct node *head)
     }
 }
 
-/* ---------- INSERT BEGIN ---------- */
 struct node *insertbeg(struct node *head)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
@@ -83,7 +80,6 @@ struct node *insertbeg(struct node *head)
     return newnode;
 }
 
-/* ---------- INSERT END ---------- */
 struct node *insertend(struct node *head)
 {
     struct node *newnode, *temp;
@@ -109,7 +105,6 @@ struct node *insertend(struct node *head)
     return head;
 }
 
-/* ---------- INSERT AT POSITION ---------- */
 struct node *insertpos(struct node *head)
 {
     int pos, count = 1;
@@ -153,7 +148,6 @@ struct node *insertpos(struct node *head)
     return head;
 }
 
-/* ---------- DELETE FIRST ---------- */
 struct node *deletfirst(struct node *head)
 {
     struct node *temp;
@@ -169,7 +163,7 @@ struct node *deletfirst(struct node *head)
     return head;
 }
 
-/* ---------- DELETE LAST ---------- */
+
 struct node *deletend(struct node *head)
 {
     struct node *temp, *prev = NULL;
@@ -200,7 +194,7 @@ struct node *deletend(struct node *head)
     return head;
 }
 
-/* ---------- DELETE AT POSITION ---------- */
+
 struct node *deletpos(struct node *head)
 {
     int pos, count = 1;
@@ -238,7 +232,6 @@ struct node *deletpos(struct node *head)
     return head;
 }
 
-/* ---------- SORT ---------- */
 void sort(struct node *head)
 {
     int temp;
@@ -259,7 +252,7 @@ void sort(struct node *head)
     printf("List sorted");
 }
 
-/* ---------- SEARCH ---------- */
+
 void search(struct node *head)
 {
     int key, pos = 1;
@@ -279,7 +272,7 @@ void search(struct node *head)
     printf("Element not found");
 }
 
-/* ---------- REVERSE ---------- */
+
 struct node *reverse(struct node *head)
 {
     struct node *prev = NULL, *curr = head, *next;
@@ -295,9 +288,23 @@ struct node *reverse(struct node *head)
     return prev;
 }
 
-/* ---------- MAIN ---------- */
+struct node* merge(struct node* l1, struct node* l2)
+{
+    if (l1 == NULL) 
+	    return l2;   
+    if (l2 == NULL) 
+	    return l1;   
+    struct node* temp = l1;
+    while (temp->next != NULL)
+	    temp = temp->next;
+    temp->next = l2;
+    return l1;
+}
+
+
 int main()
 {
+    struct node *head1 = NULL, *head2 = NULL, *merged = NULL;
     int choice;
     while (1)
     {
@@ -305,25 +312,61 @@ int main()
         printf("1. Exit\n2. Create\n3. Traverse\n4. Insert Begin\n");
         printf("5. Insert End\n6. Insert Position\n7. Delete Begin\n");
         printf("8. Delete End\n9. Delete Position\n10. Sort\n");
-        printf("11. Search\n12. Reverse\n");
+        printf("11. Search\n12. Reverse\n13. Merge\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
 
         switch (choice)
         {
-        case 1: exit(0);
-        case 2: head = create(); break;
-        case 3: traverse(head); break;
-        case 4: head = insertbeg(head); break;
-        case 5: head = insertend(head); break;
-        case 6: head = insertpos(head); break;
-        case 7: head = deletfirst(head); break;
-        case 8: head = deletend(head); break;
-        case 9: head = deletpos(head); break;
-        case 10: sort(head); break;
-        case 11: search(head); break;
-        case 12: head = reverse(head); break;
-        default: printf("Invalid choice");
+        case 1: 
+		printf("\nThe Program was  Ended. Thankyou!\n");
+		exit(0);
+        case 2: 
+		head = create(); 
+		break;
+        case 3: 
+		traverse(head); 
+		break;
+        case 4: 
+		head = insertbeg(head); 
+		break;
+        case 5: 
+		head = insertend(head); 
+		break;
+        case 6: 
+		head = insertpos(head); 
+		break;
+        case 7: 
+		head = deletfirst(head); 
+		break;
+        case 8: 
+		head = deletend(head); 
+		break;
+        case 9: 
+		head = deletpos(head); 
+		break;
+        case 10:
+	        sort(head); 
+		break;
+        case 11: 
+		search(head); 
+		break;
+        case 12: 
+		head = reverse(head); 
+		break;
+	case 13: 
+    		printf("Create firstlist:\n");
+    		head1 = create();
+
+    		printf("\nCreate secondlist:\n");
+    		head2 = create();
+
+    		merged = merge(head1, head2);
+    		printf("\nList got Merged\n");
+		traverse(merged);
+    		break;
+
+        default: printf("Invalid choice\n");
         }
     }
 }
